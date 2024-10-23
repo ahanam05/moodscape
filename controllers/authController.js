@@ -1,3 +1,5 @@
+const User = require('../models/User');
+
 module.exports.signup_get = (req, res) => {
     res.render('signup');
 }
@@ -15,5 +17,5 @@ module.exports.login_post = (req, res) => {
 }
 
 module.exports.logout_get = (req, res) => {
-    
+
 }
