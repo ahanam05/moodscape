@@ -39,6 +39,7 @@ userSchema.statics.login = async function(emailOrUsername, password){
             { username: emailOrUsername }
         ]
     });
+    
     if(user){
         const auth = await bcrypt.compare(password, user.password);
         if(auth){
