@@ -1,1 +1,16 @@
-Login Page
+<%- include('partials/header'); -%>
+
+<form action="/login" method="POST">
+    <h2> Log In </h2>
+    <label for="emailOrUsername"> Email or Username </label>
+    <input type="text" name="emailOrUsername" required />
+    <div class="emailOrUsername error"></div>
+    <label for="password"> Password </label>
+    <input type="password" name="password" required />
+    <div class="password error"></div>
+    <button type="submit"> Submit </button>
+
+    <h3> Don't have an account? <a href="/signup"> Sign Up </a></h3>
+</form>
+
+<%- include('partials/footer'); -%>
