@@ -6,6 +6,18 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const handleErrors = (err) => {
     let errors = { email: '', username: '', password: ''};
 
+    //incorrect email or username during log in
+    if(err.message === "Incorrect Email or Username"){
+        errors.email = "Email/username entered is not registered";
+        return errors;
+    }    
+
+    //incorrect password during log in
+    if(err.message === "Incorrect Password"){
+        errors.password = 'Password entered is incorrect';
+        return errors;
+    }
+
     //duplicate username during sign up, email checked manually
     if(err.code === 11000){
         errors.username = 'Username already taken';
@@ -56,6 +68,7 @@ module.exports.signup_post = async (req, res) => {
 
         const user = await User.create({ email, username, password });
         const token = createToken(user._id);
+
         res.cookie('jwt', token, {
             httpOnly: true,
             maxAge: maxAge * 1000
@@ -76,8 +89,29 @@ module.exports.signup_post = async (req, res) => {
     
 }
 
-module.exports.login_post = (req, res) => {
+module.exports.login_post = async (req, res) => {
+    const { emailOrUsername, password } = req.body;
+    try{
+        const user = await User.login(emailOrUsername, password);
+        const token = createToken(user._id);
 
+        res.cookie('jwt', token, {
+            httpOnly: true, 
+            maxAge: maxAge * 1000
+        });
+
+        res.status(201).json({ 
+            user: {
+                id: user._id,
+                email: user.email,
+                username: user.username
+            }
+        });
+    }catch(err){
+        const errors = handleErrors(err);
+        console.log(errors);
+        res.status(400).json({errors});
+    }
 }
 
 module.exports.logout_get = (req, res) => {

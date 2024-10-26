@@ -1,16 +1,37 @@
 <%- include('partials/header'); -%>
 
-<form action="/login" method="POST">
+<form id="login-form">
     <h2> Log In </h2>
-    <label for="emailOrUsername"> Email or Username </label>
-    <input type="text" name="emailOrUsername" required />
-    <div class="emailOrUsername error"></div>
-    <label for="password"> Password </label>
-    <input type="password" name="password" required />
-    <div class="password error"></div>
+    <div>
+        <label for="emailOrUsername"> Email or Username </label>
+        <input type="text" name="emailOrUsername" required />
+        <div class="emailOrUsername error"></div>
+    </div>
+    <div>
+        <label for="password"> Password </label>
+        <input type="password" name="password" required />
+        <div class="password error"></div>
+    </div>
     <button type="submit"> Submit </button>
 
     <h3> Don't have an account? <a href="/signup"> Sign Up </a></h3>
 </form>
 
+<script>
+    const form = document.getElementById("login-form");
+    const emailorUsernameError = document.querySelector(".emailOrUsername.error");
+    const passwordError = document.querySelector(".password.error");
+    const button = document.querySelector("button")
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        emailorUsernameError.textContent = '';
+        passwordError.textContent = '';
+
+    })
+
+</script>
+
 <%- include('partials/footer'); -%>
+
