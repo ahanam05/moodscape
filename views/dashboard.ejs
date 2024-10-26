@@ -2,4 +2,8 @@
 
 <h2> Dashboard </h2>
 
+<% if (locals.user) {%>
+    <div class= "user-profile"> Welcome, <%= user.username %> </div>
+<% } %>
+
 <%- include('partials/footer'); -%>
