@@ -3,7 +3,8 @@
 <h2> Dashboard </h2>
 
 <% if (locals.user) {%>
-    <div class= "user-profile"> Welcome, <%= user.username %> </div>
+    <div class= "user-profile"> Welcome, <%= user.username %> </div> <br>
+    <a href="/logout"> <button> Log Out </button> </a> <br>
 <% } %>
 
 <%- include('partials/footer'); -%>
