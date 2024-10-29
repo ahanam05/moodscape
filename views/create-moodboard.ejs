@@ -1,23 +1,44 @@
 <html>
-    <%- include('partials/header'); -%>
-
+    <head>
+        <%- include('partials/header'); -%>
+        <link rel="stylesheet" href="/css/createMoodboard.css">
+    </head>
+   
     <body>
         <% if (locals.user) {%>
             <h3> <%= locals.user.username %>, create a new moodboard</h3>
         <% } %>
 
-        <form class="new-moodboard-form">
-            <div>
+        <form id="new-moodboard-form">
+            <div class="form-group">
                 <label for="title"> Title </label>
                 <input type="text" name="title"/> <br>
             </div>
 
-            <div>
-
+            <div class="form-group">
+                <label> Add Notes </label>
+                <div class="notes-container">
+                    <input type="text" name="notes[]" class="note" placeholder="Note 1">
+                    <input type="text" name="notes[]" class="note" placeholder="Note 2">
+                    <input type="text" name="notes[]" class="note" placeholder="Note 3">
+                </div>
             </div>
 
-            <button type="submit" class="save-btn"> Save </button> 
-            <button type="button" class="cancel-btn"> Cancel </button>
+            <div class="form-group">
+                <label> Add Images </label>
+                <div class="image-grid">
+                    <% for (let i = 0; i < 5; i++) { %>
+                        <div class="image-box" data-index="i">
+                            <span class="plus-icon">+</span>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="save-btn"> Save </button> 
+                <button type="button" class="cancel-btn"> Cancel </button>
+            </div>
         </form>
 
         <script src="/js/createMoodboard.js"> </script>
