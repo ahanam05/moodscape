@@ -1,5 +1,27 @@
-<% if (locals.user) {%>
-    <h3> <%= locals.user.username %>, create a new moodboard</h3>
-<% } %>
+<html>
+    <%- include('partials/header'); -%>
 
-Create New Moodboard
+    <body>
+        <% if (locals.user) {%>
+            <h3> <%= locals.user.username %>, create a new moodboard</h3>
+        <% } %>
+
+        <form class="new-moodboard-form">
+            <div>
+                <label for="title"> Title </label>
+                <input type="text" name="title"/> <br>
+            </div>
+
+            <div>
+
+            </div>
+
+            <button type="submit" class="save-btn"> Save </button> 
+            <button type="button" class="cancel-btn"> Cancel </button>
+        </form>
+
+        <script src="/js/createMoodboard.js"> </script>
+    </body>
+</html>
+
+<%- include('partials/footer'); -%>
